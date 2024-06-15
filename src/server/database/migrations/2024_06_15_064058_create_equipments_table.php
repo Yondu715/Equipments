@@ -18,6 +18,10 @@ return new class extends Migration
             $table->text('desc');
             $table->timestamps();
 
+            $table->unique([
+                'serial_number',
+                'equipment_type_id'
+            ]);
             $table->softDeletes();
         });
     }
