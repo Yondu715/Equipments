@@ -18,7 +18,10 @@ class EquipmentResource extends JsonResource
             'id' => $this->id,
             'serial_number' => $this->serial_number,
             'equipment_type' => EquipmentTypeResource::make($this->type),
-            'desc' => $this->desc
+            'desc' => $this->desc,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
+
         ];
     }
 }
