@@ -3,7 +3,7 @@
 namespace App\Services\Equipment;
 
 use App\Models\Equipment;
-use App\Dto\In\GetEquipmentsDto;
+use App\Dto\In\Equipment\GetEquipmentsDto;
 use Illuminate\Contracts\Pagination\Paginator;
 use App\Services\Equipment\Factories\EquipmentFilterFactory;
 

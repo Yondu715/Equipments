@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Dto\In;
+namespace App\Dto\In\Equipment;
 
 use App\Http\Requests\Equipments\GetEquipmentsRequest;
 

@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Dto\In\GetEquipmentsDto;
-use App\Http\Requests\Equipments\GetEquipmentsRequest;
-use App\Http\Resources\EquipmentResource;
-use App\Services\Equipment\EquipmentService;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
+use App\Http\Resources\EquipmentResource;
+use App\Dto\In\Equipment\GetEquipmentsDto;
+use App\Services\Equipment\EquipmentService;
+use App\Http\Requests\Equipments\GetEquipmentsRequest;
+use App\Http\Requests\Equipments\UpdateEquipmentRequest;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class EquipmentController
 {
