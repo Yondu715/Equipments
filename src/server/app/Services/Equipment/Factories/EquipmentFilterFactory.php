@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Services\Equipment\Filters;
+namespace App\Services\Equipment\Factories;
+
+use App\Services\Equipment\Filters\EquipmentFilter;
 
 final class EquipmentFilterFactory
 {

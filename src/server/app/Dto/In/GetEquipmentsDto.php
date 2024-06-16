@@ -8,11 +8,11 @@ final class GetEquipmentsDto
 {
 
     public function __construct(
-        public readonly ?int $equipmentTypeId = null,
-        public readonly ?string $serialNumber = null,
-        public readonly ?string $desc = null,
-        public readonly ?int $limit = null,
-        public readonly ?int $page = null
+        public readonly ?int $equipmentTypeId,
+        public readonly ?string $serialNumber,
+        public readonly ?string $desc,
+        public readonly ?int $limit,
+        public readonly ?int $page
 
     ) {
     }

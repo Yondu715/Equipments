@@ -5,7 +5,7 @@ namespace App\Services\Equipment;
 use App\Models\Equipment;
 use App\Dto\In\GetEquipmentsDto;
 use Illuminate\Contracts\Pagination\Paginator;
-use App\Services\Equipment\Filters\EquipmentFilterFactory;
+use App\Services\Equipment\Factories\EquipmentFilterFactory;
 
 final class EquipmentService
 {
