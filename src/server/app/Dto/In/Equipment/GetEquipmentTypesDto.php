@@ -2,7 +2,7 @@
 
 namespace App\Dto\In\Equipment;
 
-use App\Http\Requests\Equipments\GetEquipmentTypesRequest;
+use App\Http\Requests\Equipment\GetEquipmentTypesRequest;
 
 final class GetEquipmentTypesDto
 {

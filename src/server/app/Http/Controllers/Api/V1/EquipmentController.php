@@ -6,8 +6,7 @@ use Illuminate\Http\Response;
 use App\Http\Resources\EquipmentResource;
 use App\Dto\In\Equipment\GetEquipmentsDto;
 use App\Services\Equipment\EquipmentService;
-use App\Http\Requests\Equipments\GetEquipmentsRequest;
-use App\Http\Requests\Equipments\UpdateEquipmentRequest;
+use App\Http\Requests\Equipment\GetEquipmentsRequest;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class EquipmentController
