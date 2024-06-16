@@ -12,6 +12,7 @@ Route::prefix('equipments')->group(function () {
     Route::get('/', [EquipmentController::class, 'index']);
     Route::get('/{equipmentId}', [EquipmentController::class, 'show']);
     Route::delete('/{equipmentId}', [EquipmentController::class, 'destroy']);
+    Route::post('/', [EquipmentController::class, 'create']);
     Route::put('/{equipmentId}', [EquipmentController::class, 'update']);
 });
 

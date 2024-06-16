@@ -3,11 +3,13 @@
 namespace App\Services\Equipment;
 
 use App\Models\Equipment;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Validator;
 use App\Dto\In\Equipment\GetEquipmentsDto;
+use App\Dto\Out\CreateEquipmentsResultDto;
 use App\Dto\In\Equipment\UpdateEquipmentDto;
 use Illuminate\Contracts\Pagination\Paginator;
 use App\Services\Equipment\Factories\EquipmentFilterFactory;
-use Illuminate\Support\Str;
 
 final class EquipmentService
 {
@@ -43,6 +45,40 @@ final class EquipmentService
     public function getById(int $id): Equipment
     {
         return Equipment::query()->with('type')->findOrFail($id);
+    }
+
+    /**
+     * @param array $data
+     * @return CreateEquipmentsResultDto
+     */
+    public function create(array $data): CreateEquipmentsResultDto
+    {
+        $errors = [];
+        $success = [];
+
+        foreach ($data as $index => $equipmentData) {
+            $validator = Validator::make($equipmentData, [
+                'equipment_type_id' => 'required|integer',
+                'serial_number' => 'required|string|max:255',
+                'desc' => 'required|string',
+            ]);
+
+            if ($validator->fails()) {
+                $errors[$index] = $validator->errors()->all();
+                continue;
+            }
+
+            try {
+                $success[$index] = Equipment::create($equipmentData);
+            } catch (\Exception $e) {
+                $errors[$index][] = $e->getMessage();
+            }
+        }
+
+        return new CreateEquipmentsResultDto(
+            errors: $errors,
+            success: $success
+        );
     }
 
     /**
