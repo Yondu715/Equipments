@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Api\V1;
 use Illuminate\Http\Response;
 use App\Http\Resources\EquipmentResource;
 use App\Dto\In\Equipment\GetEquipmentsDto;
+use App\Dto\In\Equipment\UpdateEquipmentDto;
 use App\Services\Equipment\EquipmentService;
 use App\Http\Requests\Equipment\GetEquipmentsRequest;
+use App\Http\Requests\Equipment\UpdateEquipmentRequest;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class EquipmentController
@@ -29,6 +31,14 @@ class EquipmentController
     {
         return EquipmentResource::make(
             $this->equipmentService->getById($id)
+        );
+    }
+
+    public function update(int $equipmentId, UpdateEquipmentRequest $updateEquipmentRequest): EquipmentResource
+    {
+        $updateEquipmentDto = UpdateEquipmentDto::fromRequest($updateEquipmentRequest);
+        return EquipmentResource::make(
+            $this->equipmentService->update($equipmentId, $updateEquipmentDto)
         );
     }
 

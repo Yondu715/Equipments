@@ -4,6 +4,7 @@ namespace App\Services\Equipment;
 
 use App\Models\Equipment;
 use App\Dto\In\Equipment\GetEquipmentsDto;
+use App\Dto\In\Equipment\UpdateEquipmentDto;
 use Illuminate\Contracts\Pagination\Paginator;
 use App\Services\Equipment\Factories\EquipmentFilterFactory;
 
@@ -33,6 +34,16 @@ final class EquipmentService
     public function getById(int $id): Equipment
     {
         return Equipment::query()->with('type')->findOrFail($id);
+    }
+
+    public function update(int $equipmentId, UpdateEquipmentDto $updateEquipmentDto): Equipment
+    {
+        $equipment = Equipment::query()->findOrFail($equipmentId);
+
+        $updateData = collect($updateEquipmentDto)->filter(fn ($value) => !is_null($value));
+
+        $equipment->update($updateData->toArray());
+        return $equipment;
     }
 
     public function deleteById(int $id): bool
