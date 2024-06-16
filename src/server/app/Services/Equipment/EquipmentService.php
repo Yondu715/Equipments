@@ -7,6 +7,7 @@ use App\Dto\In\Equipment\GetEquipmentsDto;
 use App\Dto\In\Equipment\UpdateEquipmentDto;
 use Illuminate\Contracts\Pagination\Paginator;
 use App\Services\Equipment\Factories\EquipmentFilterFactory;
+use Illuminate\Support\Str;
 
 final class EquipmentService
 {
@@ -40,7 +41,9 @@ final class EquipmentService
     {
         $equipment = Equipment::query()->findOrFail($equipmentId);
 
-        $updateData = collect($updateEquipmentDto)->filter(fn ($value) => !is_null($value));
+        $updateData = collect($updateEquipmentDto)
+            ->filter(fn ($value) => !is_null($value))
+            ->mapWithKeys(fn ($value, $key) => [Str::snake($key) => $value]);
 
         $equipment->update($updateData->toArray());
         return $equipment;
