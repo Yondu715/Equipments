@@ -7,6 +7,7 @@ use App\Http\Requests\Equipments\GetEquipmentsRequest;
 use App\Http\Resources\EquipmentResource;
 use App\Services\Equipment\EquipmentService;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Http\Response;
 
 class EquipmentController
 {
@@ -31,4 +32,9 @@ class EquipmentController
         );
     }
 
+    public function destroy(int $id): Response
+    {
+        $this->equipmentService->deleteById($id);
+        return response()->noContent();
+    }
 }

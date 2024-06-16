@@ -35,4 +35,8 @@ final class EquipmentService
         return Equipment::query()->with('type')->findOrFail($id);
     }
 
+    public function deleteById(int $id): bool
+    {
+        return Equipment::query()->findOrFail($id)->delete();
+    }
 }

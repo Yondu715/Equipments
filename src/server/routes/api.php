@@ -11,6 +11,7 @@ Route::patterns([
 Route::prefix('equipments')->group(function () {
     Route::get('/', [EquipmentController::class, 'index']);
     Route::get('/{equipmentId}', [EquipmentController::class, 'show']);
+    Route::delete('/{equipmentId}', [EquipmentController::class, 'destroy']);
 });
 
 Route::prefix('equipment-types')->group(function () {
