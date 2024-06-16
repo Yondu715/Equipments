@@ -10,6 +10,7 @@ Route::patterns([
 
 Route::prefix('equipments')->group(function () {
     Route::get('/', [EquipmentController::class, 'index']);
+    Route::get('/{equipmentId}', [EquipmentController::class, 'show']);
 });
 
 Route::prefix('equipment-types')->group(function () {

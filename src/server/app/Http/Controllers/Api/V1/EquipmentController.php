@@ -24,4 +24,11 @@ class EquipmentController
         );
     }
 
+    public function show(int $id): EquipmentResource
+    {
+        return EquipmentResource::make(
+            $this->equipmentService->getById($id)
+        );
+    }
+
 }

@@ -30,4 +30,9 @@ final class EquipmentService
             );
     }
 
+    public function getById(int $id): Equipment
+    {
+        return Equipment::query()->with('type')->findOrFail($id);
+    }
+
 }
