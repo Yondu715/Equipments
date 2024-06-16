@@ -16,8 +16,8 @@ class EquipmentResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'serialNumber' => $this->serial_number,
-            'equipmentType' => EquipmentTypeResource::make($this->type),
+            'serial_number' => $this->serial_number,
+            'equipment_type' => EquipmentTypeResource::make($this->type),
             'desc' => $this->desc
         ];
     }
