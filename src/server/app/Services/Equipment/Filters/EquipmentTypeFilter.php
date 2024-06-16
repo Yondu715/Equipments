@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Builder;
 
 final class EquipmentTypeFilter extends AbstractFilter
 {
+    /**
+     * @return array
+     */
     protected function getCallbacks(): array
     {
         return [
@@ -16,16 +19,31 @@ final class EquipmentTypeFilter extends AbstractFilter
         ];
     }
 
+    /**
+     * @param Builder $builder
+     * @param string $value
+     * @return void
+     */
     protected function name(Builder $builder, string $value): void
     {
         $builder->where('name', 'like', '%' . $value . '%');
     }
 
+    /**
+     * @param Builder $builder
+     * @param string $value
+     * @return void
+     */
     protected function mask(Builder $builder, string $value): void
     {
         $builder->where('mask', $value);
     }
 
+    /**
+     * @param Builder $builder
+     * @param int $value
+     * @return void
+     */
     protected function q(Builder $builder, int $value): void
     {
         $builder->where('name', $value);

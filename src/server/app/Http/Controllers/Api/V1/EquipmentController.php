@@ -19,6 +19,10 @@ class EquipmentController
     ) {
     }
 
+    /**
+     * @param GetEquipmentsRequest $getEquipmentsRequest
+     * @return AnonymousResourceCollection
+     */
     public function index(GetEquipmentsRequest $getEquipmentsRequest): AnonymousResourceCollection
     {
         $getEquipmentsDto = GetEquipmentsDto::fromRequest($getEquipmentsRequest);
@@ -27,6 +31,10 @@ class EquipmentController
         );
     }
 
+    /**
+     * @param int $id
+     * @return EquipmentResource
+     */
     public function show(int $id): EquipmentResource
     {
         return EquipmentResource::make(
@@ -34,6 +42,11 @@ class EquipmentController
         );
     }
 
+    /**
+     * @param int $equipmentId
+     * @param UpdateEquipmentRequest $updateEquipmentRequest
+     * @return EquipmentResource
+     */
     public function update(int $equipmentId, UpdateEquipmentRequest $updateEquipmentRequest): EquipmentResource
     {
         $updateEquipmentDto = UpdateEquipmentDto::fromRequest($updateEquipmentRequest);
@@ -42,6 +55,10 @@ class EquipmentController
         );
     }
 
+    /**
+     * @param int $id
+     * @return Response
+     */
     public function destroy(int $id): Response
     {
         $this->equipmentService->deleteById($id);

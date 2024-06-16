@@ -15,6 +15,10 @@ final class EquipmentTypeService
     ) {
     }
 
+    /**
+     * @param GetEquipmentTypesDto $getEquipmentTypesDto
+     * @return Paginator
+     */
     public function getAll(GetEquipmentTypesDto $getEquipmentTypesDto): Paginator
     {
         $filters = [

@@ -16,6 +16,10 @@ final class GetEquipmentTypesDto
     ) {
     }
 
+    /**
+     * @param GetEquipmentTypesRequest $getEquipmentTypesRequest
+     * @return self
+     */
     public static function fromRequest(GetEquipmentTypesRequest $getEquipmentTypesRequest): self
     {
         return new self(

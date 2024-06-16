@@ -14,6 +14,10 @@ final class UpdateEquipmentDto
     ) {
     }
 
+    /**
+     * @param UpdateEquipmentRequest $updateEquipmentRequest
+     * @return self
+     */
     public static function fromRequest(UpdateEquipmentRequest $updateEquipmentRequest): self
     {
         return new self(

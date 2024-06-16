@@ -17,6 +17,10 @@ final class EquipmentService
     ) {
     }
 
+    /**
+     * @param GetEquipmentsDto $getEquipmentsDto
+     * @return Paginator
+     */
     public function getAll(GetEquipmentsDto $getEquipmentsDto): Paginator
     {
         $filters = [
@@ -32,11 +36,20 @@ final class EquipmentService
             );
     }
 
+    /**
+     * @param int $id
+     * @return Equipment
+     */
     public function getById(int $id): Equipment
     {
         return Equipment::query()->with('type')->findOrFail($id);
     }
 
+    /**
+     * @param int $equipmentId
+     * @param UpdateEquipmentDto $updateEquipmentDto
+     * @return Equipment
+     */
     public function update(int $equipmentId, UpdateEquipmentDto $updateEquipmentDto): Equipment
     {
         $equipment = Equipment::query()->findOrFail($equipmentId);
@@ -49,6 +62,10 @@ final class EquipmentService
         return $equipment;
     }
 
+    /**
+     * @param int $id
+     * @return bool
+     */
     public function deleteById(int $id): bool
     {
         return Equipment::query()->findOrFail($id)->delete();
