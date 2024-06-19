@@ -6,6 +6,13 @@ use App\Http\Requests\Equipment\GetEquipmentTypesRequest;
 
 final class GetEquipmentTypesDto
 {
+    /**
+     * @param ?string $name
+     * @param ?string $mask
+     * @param ?string $q
+     * @param ?int $limit
+     * @param ?int $page
+     */
     public function __construct(
         public readonly ?string $name,
         public readonly ?string $mask,

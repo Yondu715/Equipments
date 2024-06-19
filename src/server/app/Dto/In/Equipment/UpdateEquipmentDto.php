@@ -6,11 +6,15 @@ use App\Http\Requests\Equipment\UpdateEquipmentRequest;
 
 final class UpdateEquipmentDto
 {
+    /**
+     * @param ?int $equipmentTypeId
+     * @param ?string $serialNumber
+     * @param ?string $desc
+     */
     public function __construct(
         public readonly ?int $equipmentTypeId,
         public readonly ?string $serialNumber,
         public readonly ?string $desc,
-
     ) {
     }
 

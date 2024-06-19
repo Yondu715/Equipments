@@ -3,8 +3,12 @@
 namespace App\Http\Resources\Equipments;
 
 use Illuminate\Http\Request;
+use App\Dto\Out\CreateEquipmentsResultDto;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @mixin CreateEquipmentsResultDto
+ */
 class CreateEquipmentsResource extends JsonResource
 {
     /**

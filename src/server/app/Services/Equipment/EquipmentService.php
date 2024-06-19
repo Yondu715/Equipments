@@ -13,7 +13,9 @@ use App\Services\Equipment\Factories\EquipmentFilterFactory;
 
 final class EquipmentService
 {
-
+    /**
+     * @param EquipmentFilterFactory $equipmentFilterFactory
+     */
     public function __construct(
         private readonly EquipmentFilterFactory $equipmentFilterFactory
     ) {
@@ -30,6 +32,7 @@ final class EquipmentService
             'desc' => $getEquipmentsDto->desc,
             'equipmentTypeId' => $getEquipmentsDto->equipmentTypeId
         ];
+
         return Equipment::query()
             ->filter($this->equipmentFilterFactory->create($filters))
             ->paginate(
@@ -95,6 +98,7 @@ final class EquipmentService
             ->mapWithKeys(fn ($value, $key) => [Str::snake($key) => $value]);
 
         $equipment->update($updateData->toArray());
+
         return $equipment;
     }
 

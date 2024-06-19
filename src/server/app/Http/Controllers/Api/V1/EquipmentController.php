@@ -15,7 +15,9 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class EquipmentController
 {
-
+    /**
+     * @param EquipmentService $equipmentService
+     */
     public function __construct(
         private readonly EquipmentService $equipmentService
     ) {
@@ -28,6 +30,7 @@ class EquipmentController
     public function index(GetEquipmentsRequest $getEquipmentsRequest): AnonymousResourceCollection
     {
         $getEquipmentsDto = GetEquipmentsDto::fromRequest($getEquipmentsRequest);
+
         return EquipmentResource::collection(
             $this->equipmentService->getAll($getEquipmentsDto)
         );
@@ -44,6 +47,10 @@ class EquipmentController
         );
     }
 
+    /**
+     * @param Request $request
+     * @return CreateEquipmentsResource
+     */
     public function create(Request $request): CreateEquipmentsResource
     {
         return CreateEquipmentsResource::make(
@@ -59,6 +66,7 @@ class EquipmentController
     public function update(int $equipmentId, UpdateEquipmentRequest $updateEquipmentRequest): EquipmentResource
     {
         $updateEquipmentDto = UpdateEquipmentDto::fromRequest($updateEquipmentRequest);
+
         return EquipmentResource::make(
             $this->equipmentService->update($equipmentId, $updateEquipmentDto)
         );
@@ -71,6 +79,7 @@ class EquipmentController
     public function destroy(int $id): Response
     {
         $this->equipmentService->deleteById($id);
+
         return response()->noContent();
     }
 }

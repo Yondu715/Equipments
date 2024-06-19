@@ -10,18 +10,22 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class EquipmentTypeController
 {
-
+    /**
+     * @param EquipmentTypeService $equipmentTypeService
+     */
     public function __construct(
         private readonly EquipmentTypeService $equipmentTypeService
     ) {
     }
 
     /**
+     * @param GetEquipmentTypesRequest $getEquipmentTypesRequest
      * @return AnonymousResourceCollection
      */
     public function index(GetEquipmentTypesRequest $getEquipmentTypesRequest): AnonymousResourceCollection
     {
         $getEquipmentTypesDto = GetEquipmentTypesDto::fromRequest($getEquipmentTypesRequest);
+
         return EquipmentTypeResource::collection(
             $this->equipmentTypeService->getAll($getEquipmentTypesDto)
         );

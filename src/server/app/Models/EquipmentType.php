@@ -21,6 +21,9 @@ class EquipmentType extends Model
         'mask',
     ];
 
+    /**
+     * @return HasMany
+     */
     public function equipment(): HasMany
     {
         return $this->hasMany(Equipment::class, 'equipment_type_id', 'id');

@@ -25,6 +25,9 @@ class Equipment extends Model
         'desc',
     ];
 
+    /**
+     * @return BelongsTo
+     */
     public function type(): BelongsTo
     {
         return $this->belongsTo(EquipmentType::class, 'equipment_type_id', 'id');

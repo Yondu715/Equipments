@@ -7,6 +7,13 @@ use App\Http\Requests\Equipment\GetEquipmentsRequest;
 final class GetEquipmentsDto
 {
 
+    /**
+     * @param ?int $equipmentTypeId
+     * @param ?string $serialNumber
+     * @param ?string $desc
+     * @param ?int $limit
+     * @param ?int $page
+     */
     public function __construct(
         public readonly ?int $equipmentTypeId,
         public readonly ?string $serialNumber,

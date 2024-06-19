@@ -3,8 +3,12 @@
 namespace App\Http\Resources\Equipments;
 
 use Illuminate\Http\Request;
+use App\Models\EquipmentType;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @mixin EquipmentType
+ */
 class EquipmentTypeResource extends JsonResource
 {
     /**

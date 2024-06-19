@@ -9,7 +9,9 @@ use App\Services\Equipment\Factories\EquipmentTypeFilterFactory;
 
 final class EquipmentTypeService
 {
-
+    /**
+     * @param EquipmentTypeFilterFactory $equipmentTypeFilterFactory
+     */
     public function __construct(
         private readonly EquipmentTypeFilterFactory $equipmentTypeFilterFactory
     ) {
