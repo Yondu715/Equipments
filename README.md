@@ -80,4 +80,3 @@ php artisan db:seed
 
 ## Использование
 Открываем браузер по адресу http://localhost:3000 
-![test](https://tenor.com/ru/view/magic-spongebob-rainbow-gif-15431163)
