@@ -3,11 +3,26 @@
 namespace App\Models;
 
 use App\Models\Traits\HasFilter;
+use App\Models\Filters\FilterInterface;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
+
+/**
+ * @property int $id
+ * @property string $serial_number
+ * @property int $equipment_type_id
+ * @property EquipmentType $type
+ * @property string $desc
+ * @property timestamp $created_at
+ * @property timestamp $updated_at
+ * @method BelongsTo type()
+ * @method Builder filter(FilterInterface $filter)
+ * @method static Builder|static query()
+ */
 class Equipment extends Model
 {
     use HasFactory, SoftDeletes, HasFilter;
