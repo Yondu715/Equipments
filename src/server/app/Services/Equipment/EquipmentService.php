@@ -32,7 +32,7 @@ final class EquipmentService
         ];
         return Equipment::query()
             ->filter($this->equipmentFilterFactory->create($filters))
-            ->simplePaginate(
+            ->paginate(
                 perPage: $getEquipmentsDto->limit,
                 page: $getEquipmentsDto->page
             );
@@ -71,7 +71,7 @@ final class EquipmentService
             try {
                 $success[$index] = Equipment::create($equipmentData);
             } catch (\Exception $e) {
-                $errors[$index][] = $e->getMessage();
+                $errors[$index] = $e->getMessage();
             }
         }
 
