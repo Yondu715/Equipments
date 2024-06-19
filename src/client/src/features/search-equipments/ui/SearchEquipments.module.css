@@ -1,0 +1,12 @@
+.wrapper {
+    width: 40vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.input {
+    height: 33px;
+    width: clamp(50px, 50%, 500px);
+}

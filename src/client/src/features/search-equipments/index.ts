@@ -1,0 +1,1 @@
+export { default as SearchEquipments } from './ui/SearchEquipments.vue';
