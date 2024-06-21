@@ -8,10 +8,10 @@ use Illuminate\Support\Str;
 use App\Models\EquipmentType;
 use Illuminate\Support\Facades\Validator;
 use App\Dto\In\Equipment\GetEquipmentsDto;
-use App\Dto\Out\CreateEquipmentsResultDto;
 use App\Dto\In\Equipment\UpdateEquipmentDto;
-use App\Exceptions\InvalidSerialNumberException;
 use Illuminate\Contracts\Pagination\Paginator;
+use App\Exceptions\InvalidSerialNumberException;
+use App\Dto\Out\Equipment\CreateEquipmentsResultDto;
 use App\Services\Equipment\Factories\EquipmentFilterFactory;
 
 final class EquipmentService
@@ -59,8 +59,8 @@ final class EquipmentService
      */
     public function create(array $data): CreateEquipmentsResultDto
     {
-        $errors = [];
-        $success = [];
+        $errors = collect();
+        $success = collect();
 
         foreach ($data as $index => $equipmentData) {
             $validator = Validator::make($equipmentData, [

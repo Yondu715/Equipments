@@ -19,8 +19,12 @@ class CreateEquipmentsResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'errors' => $this->errors,
-            'success' => EquipmentResource::collection($this->success)
+            'errors' => $this->errors->mapWithKeys(
+                fn ($item, $key) => [$key + 1 => $item]
+            ),
+            'success' => $this->success->mapWithKeys(
+                fn ($item, $key) => [$key + 1 => EquipmentResource::make($item)]
+            )
         ];
     }
 }
