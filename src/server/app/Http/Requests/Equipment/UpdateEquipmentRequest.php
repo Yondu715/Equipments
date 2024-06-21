@@ -14,7 +14,7 @@ class UpdateEquipmentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'equipment_type_id' => 'integer',
+            'equipment_type_id' => 'integer|exists:equipment_types,id',
             'serial_number' => 'string|max:255',
             'desc' => 'string|max:255'
         ];

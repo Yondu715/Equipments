@@ -2,12 +2,15 @@
 
 namespace App\Services\Equipment;
 
+use Exception;
 use App\Models\Equipment;
 use Illuminate\Support\Str;
+use App\Models\EquipmentType;
 use Illuminate\Support\Facades\Validator;
 use App\Dto\In\Equipment\GetEquipmentsDto;
 use App\Dto\Out\CreateEquipmentsResultDto;
 use App\Dto\In\Equipment\UpdateEquipmentDto;
+use App\Exceptions\InvalidSerialNumberException;
 use Illuminate\Contracts\Pagination\Paginator;
 use App\Services\Equipment\Factories\EquipmentFilterFactory;
 
@@ -61,7 +64,7 @@ final class EquipmentService
 
         foreach ($data as $index => $equipmentData) {
             $validator = Validator::make($equipmentData, [
-                'equipment_type_id' => 'required|integer',
+                'equipment_type_id' => 'required|integer|exists:equipment_types,id',
                 'serial_number' => 'required|string|max:255',
                 'desc' => 'required|string',
             ]);
@@ -72,8 +75,16 @@ final class EquipmentService
             }
 
             try {
+                $equipmentType = EquipmentType::findOrFail($equipmentData['equipment_type_id']);
+                $this->validateSerialNumber($equipmentData['serial_number'], $equipmentType->mask);
+            } catch (Exception $e) {
+                $errors[$index] = $e->getMessage();
+                continue;
+            }
+
+            try {
                 $success[$index] = Equipment::create($equipmentData);
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 $errors[$index] = $e->getMessage();
             }
         }
@@ -109,5 +120,34 @@ final class EquipmentService
     public function deleteById(int $id): bool
     {
         return Equipment::query()->findOrFail($id)->delete();
+    }
+
+
+    /**
+     * @param string $serialNumber
+     * @param string $mask
+     * @return bool
+     * @throws InvalidSerialNumberException
+     */
+    private function validateSerialNumber(string $serialNumber, string $mask): bool
+    {
+        $regexMap = [
+            'N' => '[0-9]',
+            'A' => '[A-Z]',
+            'a' => '[a-z]',
+            'X' => '[A-Z0-9]',
+            'Z' => '[-_@]'
+        ];
+
+        $regexPattern = '';
+        for ($i = 0; $i < strlen($mask); $i++) {
+            $char = $mask[$i];
+            $regexPattern .= isset($regexMap[$char]) ? $regexMap[$char] : $char;
+        }
+        if (preg_match('/^' . $regexPattern . '$/', $serialNumber) !== 1) {
+            throw new InvalidSerialNumberException();
+        }
+
+        return true;
     }
 }
