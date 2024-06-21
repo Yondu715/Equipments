@@ -31,7 +31,7 @@ final class EquipmentTypeService
 
         return EquipmentType::query()
             ->filter($this->equipmentTypeFilterFactory->create($filters))
-            ->simplePaginate(
+            ->paginate(
                 perPage: $getEquipmentTypesDto->limit,
                 page: $getEquipmentTypesDto->page
             );
