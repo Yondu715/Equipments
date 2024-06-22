@@ -103,6 +103,11 @@ final class EquipmentService
     public function update(int $equipmentId, UpdateEquipmentDto $updateEquipmentDto): Equipment
     {
         $equipment = Equipment::query()->findOrFail($equipmentId);
+        
+        if ($updateEquipmentDto->serialNumber) {
+            $equipmentType = EquipmentType::query()->findOrFail($updateEquipmentDto->equipmentTypeId);
+            $this->validateSerialNumber($updateEquipmentDto->serialNumber, $equipmentType->mask);
+        }
 
         $updateData = collect($updateEquipmentDto)
             ->filter(fn ($value) => !is_null($value))
