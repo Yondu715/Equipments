@@ -1,0 +1,1 @@
+export { default as AddEquipmentForm } from './ui/AddEquipmentForm.vue';
