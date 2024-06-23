@@ -75,8 +75,15 @@ php artisan migrate
 php artisan db:seed
 ```
 
-### Nuxt
-Для клиента собирается образ внутри докер контейнера
+### Клиент
+Устанавливаем зависимости
+```sh
+docker-compose exec node npm i
+```
 
-## Использование
-Открываем браузер по адресу http://localhost:3000 
+Запускаем в dev режиме
+```sh
+make compose-dev
+```
+
+Открываем браузер по адресу: http://localhost:3009
