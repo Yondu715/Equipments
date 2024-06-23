@@ -19,3 +19,5 @@ export interface ResponseWrap<T> {
     meta?: PaginationMeta,
     links?: Links, 
 }
+
+export type ApiException = string;

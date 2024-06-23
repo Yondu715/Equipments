@@ -15,10 +15,25 @@ export interface EquipmentDto {
     equipment_type: EquipmentTypeDto
 }
 
-export interface UpdateEquipment {
+export interface UpdateEquipmentParams {
     serial_number?: string,
     desc?: string,
     equipment_type_id?: number
+}
+
+export interface CreateEquipmentParams {
+    serial_number: string,
+    desc: string,
+    equipment_type_id: number
+}
+
+export interface CreateEquipmentsResponse {
+    errors: {
+        [key: string]: string
+    },
+    success: {
+        [key: string]: EquipmentDto
+    }
 }
 
 export type EquipmentFilters = Partial<Pick<EquipmentDto, 'serial_number' | 'desc'>>;
