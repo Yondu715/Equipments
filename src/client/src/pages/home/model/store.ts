@@ -1,17 +1,18 @@
 import { attach, createEvent, createStore, sample } from 'effector';
-import { pending } from 'patronum';
+import { pending, reset } from 'patronum';
 import { equipmentModel } from '~/entities/equipment';
-import { navigateToFx } from '~/shared/lib/navigation';
-import { routes } from '~/shared/routing';
+import { navigateFx, routes } from '~/shared/routing';
 
-export const getEquipmentsFx = attach({
+const getEquipmentsFx = attach({
     effect: equipmentModel.getEquipmentsFx
 });
 
 export const pageMounted = createEvent();
+export const pageUnmounted = createEvent();
+export const onAddItemClicked = createEvent();
 export const onItemClicked = createEvent<number>();
 
-export const $isEquipmentsLoading = pending([getEquipmentsFx, equipmentModel.getEquipmentsFx]);
+export const $isEquipmentsLoading = pending([equipmentModel.getEquipmentsFx]);
 
 export const $currentPage = createStore<number>(1);
 
@@ -21,17 +22,27 @@ sample({
     target: getEquipmentsFx
 });
 
+reset({
+    clock: pageUnmounted,
+    target: [equipmentModel.$equipments, equipmentModel.$paginationInfo]
+});
+
+sample({
+    clock: onAddItemClicked,
+    fn: () => routes.equipments.addEquipment,
+    target: navigateFx
+});
+
 sample({
     clock: onItemClicked,
-    fn: (id) => ({
-        path: `${routes.equipments.root}/${id}`
-    }),
-    target: navigateToFx
-})
+    fn: (id) => `${routes.equipments.root}/${id}`,
+    target: navigateFx
+});
 
 sample({
     clock: equipmentModel.$paginationInfo,
-    fn: (clck) => clck?.currentPage ?? 1,
+    filter: Boolean,
+    fn: (clock) => clock.currentPage,
     target: $currentPage
 });
 
