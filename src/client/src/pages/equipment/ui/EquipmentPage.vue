@@ -1,34 +1,35 @@
 <script setup lang="ts">
     import { useUnit } from 'effector-vue/composition';
-    import { $isEquipmentLoading, pageMounted, pageUnmounted } from '../model/store';
+    import { onEditClicked, pageMounted, pageUnmounted } from '../model/store';
     import { equipmentModel } from '~/entities/equipment';
-    import styles from './EquipmentPage.module.css';
     import { DeleteEquipmentButton } from '~/features/delete-equipment';
-import { BackButton } from '~/shared/ui/back-button';
+    import { BackButton } from '~/shared/ui/back-button';
+    import { ElCard, ElButton } from 'element-plus';
+    import { useRoute } from 'vue-router';
+    import { onMounted, onUnmounted } from 'vue';
+    import styles from './EquipmentPage.module.css';
 
     const route = useRoute();
 
     const {
         equipment,
-        isLoading,
         onMountedAction,
-        onUnmountedAction
+        onUnmountedAction,
+        onEditButtonClickAction
     } = useUnit({
-        isLoading: $isEquipmentLoading,
         equipment: equipmentModel.$equipment,
         onMountedAction: pageMounted,
-        onUnmountedAction: pageUnmounted
+        onUnmountedAction: pageUnmounted,
+        onEditButtonClickAction: onEditClicked
     });
 
     onMounted(() => onMountedAction(Number(route.params.id)))
     onUnmounted(onUnmountedAction);
-
 </script>
 
 <template>
     <div
     :class="styles.page"
-    v-loading="isLoading"
     >
         <BackButton />
         <ElCard
@@ -68,11 +69,11 @@ import { BackButton } from '~/shared/ui/back-button';
             <template #footer>
                 <ElButton
                     type="primary"
+                    @click="() => onEditButtonClickAction(Number(route.params.id))"
                 >
                     Редактировать
                 </ElButton>
                 <DeleteEquipmentButton
-                    v-if="equipment"
                     :equipment-id="equipment.id"
                 />
             </template>
