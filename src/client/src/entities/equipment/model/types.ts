@@ -1,4 +1,4 @@
-import type { EquipmentFilters, EquipmentTypeFilters } from '~/shared/api/equipments/types';
+import type { EquipmentFilters, EquipmentTypeFilters, UpdateEquipmentParams as UpdateEquipment } from '~/shared/api/equipments';
 
 export type EquipmentType = {
     id: number,
@@ -32,4 +32,14 @@ export interface GetEquipmentsParams {
     page?: number,
     limit?: number,
     filters?: EquipmentFilters
+}
+
+export interface GetEquipmentTypesParams {
+    page?: number,
+    limit?: number,
+    filters?: EquipmentTypeFilters
+}
+
+export interface UpdateEquipmentParams extends UpdateEquipment {
+    id: number
 }

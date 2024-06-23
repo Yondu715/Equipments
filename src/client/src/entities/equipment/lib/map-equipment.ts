@@ -1,4 +1,4 @@
-import type { EquipmentDto, EquipmentTypeDto } from '~/shared/api/equipments/types';
+import type { EquipmentDto, EquipmentTypeDto } from '~/shared/api/equipments';
 import type { Equipment, EquipmentType } from '../model/types';
 
 
@@ -25,4 +25,8 @@ export const mapEquipment = (equipmentDto: EquipmentDto): Equipment => {
 
 export const mapEquipments = (equipmentsDto: EquipmentDto[]): Equipment[] => {
     return equipmentsDto.map((equipmentDto) => mapEquipment(equipmentDto));
+}
+
+export const mapEquipmentTypes = (equipmentTypesDto: EquipmentTypeDto[]): EquipmentType[] => {
+    return equipmentTypesDto.map((equipmentTypeDto) => mapEquipmentType(equipmentTypeDto));
 }
