@@ -15,10 +15,10 @@ export const $isSearchLoading = pending([getEquipmentsFx]);
 sample({
     clock: searchPressed,
     source: $search,
-    filter: (source, _) => source.length > 0,
-    fn: (source) => ({
+    filter: (search) => search.length > 0,
+    fn: (search) => ({
         filters: {
-            serial_number: source
+            serial_number: search
         }
     }),
     target: getEquipmentsFx
@@ -27,7 +27,7 @@ sample({
 sample({
     clock: searchPressed,
     source: $search,
-    filter: (source, _) => source.length === 0,
+    filter: (search) => search.length === 0,
     fn: () => {},
     target: getEquipmentsFx
 });

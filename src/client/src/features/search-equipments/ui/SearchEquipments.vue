@@ -2,6 +2,7 @@
 import { useUnit, useVModel } from 'effector-vue/composition';
 import { $isSearchLoading, $search, searchPressed } from '../model/store';
 import { Search } from '@element-plus/icons-vue';
+import { ElInput, ElButton } from 'element-plus';
 import styles from './SearchEquipments.module.css';
 
 const search = useVModel($search);
