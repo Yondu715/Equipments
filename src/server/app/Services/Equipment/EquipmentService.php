@@ -67,7 +67,7 @@ final class EquipmentService
             $validator = Validator::make($equipmentData, [
                 'equipment_type_id' => 'required|integer|exists:equipment_types,id',
                 'serial_number' => 'required|string|max:255',
-                'desc' => 'required|string',
+                'desc' => 'string|max:255',
             ]);
 
             if ($validator->fails()) {
