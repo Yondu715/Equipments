@@ -46,15 +46,6 @@ final class EquipmentService
     }
 
     /**
-     * @param int $id
-     * @return Equipment
-     */
-    public function getById(int $id): Equipment
-    {
-        return Equipment::query()->with('type')->findOrFail($id);
-    }
-
-    /**
      * @param array $data
      * @return CreateEquipmentsResultDto
      */
@@ -96,15 +87,14 @@ final class EquipmentService
         );
     }
 
+
     /**
-     * @param int $equipmentId
+     * @param Equipment $equipment
      * @param UpdateEquipmentDto $updateEquipmentDto
      * @return Equipment
      */
-    public function update(int $equipmentId, UpdateEquipmentDto $updateEquipmentDto): Equipment
-    {
-        $equipment = Equipment::query()->findOrFail($equipmentId);
-        
+    public function update(Equipment $equipment, UpdateEquipmentDto $updateEquipmentDto): Equipment
+    {        
         if ($updateEquipmentDto->serialNumber) {
             $equipmentType = EquipmentType::query()->findOrFail($updateEquipmentDto->equipmentTypeId);
             $this->validateSerialNumber($updateEquipmentDto->serialNumber, $equipmentType->mask);
@@ -120,12 +110,12 @@ final class EquipmentService
     }
 
     /**
-     * @param int $id
+     * @param Equipment $equipment
      * @return bool
      */
-    public function deleteById(int $id): bool
+    public function deleteEquipment(Equipment $equipment): bool
     {
-        return Equipment::query()->findOrFail($id)->delete();
+        return $equipment->delete();
     }
 
 

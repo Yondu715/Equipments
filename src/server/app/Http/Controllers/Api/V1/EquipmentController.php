@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Models\Equipment;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Dto\In\Equipment\GetEquipmentsDto;
@@ -40,11 +41,9 @@ class EquipmentController
      * @param int $id
      * @return EquipmentResource
      */
-    public function show(int $id): EquipmentResource
+    public function show(Equipment $equipment): EquipmentResource
     {
-        return EquipmentResource::make(
-            $this->equipmentService->getById($id)
-        );
+        return EquipmentResource::make($equipment);
     }
 
     /**
@@ -63,12 +62,12 @@ class EquipmentController
      * @param UpdateEquipmentRequest $updateEquipmentRequest
      * @return EquipmentResource
      */
-    public function update(int $equipmentId, UpdateEquipmentRequest $updateEquipmentRequest): EquipmentResource
+    public function update(Equipment $equipment, UpdateEquipmentRequest $updateEquipmentRequest): EquipmentResource
     {
         $updateEquipmentDto = UpdateEquipmentDto::fromRequest($updateEquipmentRequest);
 
         return EquipmentResource::make(
-            $this->equipmentService->update($equipmentId, $updateEquipmentDto)
+            $this->equipmentService->update($equipment, $updateEquipmentDto)
         );
     }
 
@@ -76,9 +75,9 @@ class EquipmentController
      * @param int $id
      * @return Response
      */
-    public function destroy(int $id): Response
+    public function destroy(Equipment $equipment): Response
     {
-        $this->equipmentService->deleteById($id);
+        $this->equipmentService->deleteEquipment($equipment);
 
         return response()->noContent();
     }
