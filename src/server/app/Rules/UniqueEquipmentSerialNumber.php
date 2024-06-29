@@ -10,6 +10,9 @@ class UniqueEquipmentSerialNumber implements ValidationRule
 {
 
 
+    /**
+     * @param int $equipmentTypeId
+     */
     public function __construct(
         private readonly int $equipmentTypeId
     ) {
