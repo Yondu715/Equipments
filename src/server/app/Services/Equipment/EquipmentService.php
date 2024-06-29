@@ -64,7 +64,7 @@ final class EquipmentService
                     'max:255',
                     new UniqueEquipmentSerialNumber($equipmentData['equipment_type_id']),
                 ],
-                'desc' => 'string|max:255',
+                'desc' => 'string|max:255|nullable',
             ]);
 
             if ($validator->fails()) {
