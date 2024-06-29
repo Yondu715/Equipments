@@ -15,18 +15,17 @@ class EquipmentSeeder extends Seeder
         $equipments = [
             [
                 'equipment_type_id' => 1,
-                'serial_number' => '3255423245',
+                'serial_number' => '00AAAAA0AA',
                 'desc' => '...'
             ],
             [
                 'equipment_type_id' => 2,
-                'serial_number' => '9483j37d7',
+                'serial_number' => '000AA0_0aa',
                 'desc' => '...'
             ],
             [
                 'equipment_type_id' => 3,
-                'serial_number' => '31248dsddssa',
-                'desc' => '...'
+                'serial_number' => '0AAAA0-AAA',
             ]
         ];
 
