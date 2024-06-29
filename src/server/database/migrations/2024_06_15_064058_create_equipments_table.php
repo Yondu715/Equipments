@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('equipment_type_id')->constrained('equipment_types')->cascadeOnUpdate();
             $table->string('serial_number');
-            $table->text('desc');
+            $table->text('desc')->nullable();
             $table->timestamps();
 
             $table->unique([
