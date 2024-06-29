@@ -19,4 +19,4 @@ compose-ps:
 	docker-compose ps
 
 compose-dev:
-	docker-compose exec node -u root node npm run dev
+	docker-compose exec -u root node npm run dev
