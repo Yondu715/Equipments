@@ -100,10 +100,12 @@ final class EquipmentService
      * @return Equipment
      */
     public function update(Equipment $equipment, UpdateEquipmentDto $updateEquipmentDto): Equipment
-    {        
+    {
         if ($updateEquipmentDto->serialNumber || $updateEquipmentDto->equipmentTypeId) {
             $equipmentType = EquipmentType::query()->findOrFail($updateEquipmentDto->equipmentTypeId ?? $equipment->equipment_type_id);
+
             $this->validateSerialNumber($updateEquipmentDto->serialNumber ?? $equipment->serial_number, $equipmentType->mask);
+            $this->checkUniqueSerialNumber($updateEquipmentDto->serialNumber ?? $equipment->serial_number, $equipmentType->id);
         }
 
         $updateData = collect($updateEquipmentDto)
@@ -148,6 +150,24 @@ final class EquipmentService
         }
         if (preg_match('/^' . $regexPattern . '$/', $serialNumber) !== 1) {
             throw new InvalidSerialNumberException();
+        }
+
+        return true;
+    }
+
+    /**
+     * @param string $serialNumber
+     * @param int $equipmentTypeId
+     * @return bool
+     */
+    private function checkUniqueSerialNumber(string $serialNumber, int $equipmentTypeId): bool
+    {
+        $exists = Equipment::where('equipment_type_id', $equipmentTypeId)
+            ->where('serial_number', $serialNumber)
+            ->exists();
+
+        if ($exists) {
+            throw new Exception('The equipment with this serial number and type already exists');
         }
 
         return true;
