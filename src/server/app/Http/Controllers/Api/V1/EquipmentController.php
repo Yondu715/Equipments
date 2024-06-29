@@ -51,7 +51,7 @@ class EquipmentController
      * @param Request $request
      * @return CreateEquipmentsResource
      */
-    public function create(Request $request): CreateEquipmentsResource
+    public function store(Request $request): CreateEquipmentsResource
     {
         return CreateEquipmentsResource::make(
             $this->equipmentService->create($request->all())

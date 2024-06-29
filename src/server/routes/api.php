@@ -5,16 +5,10 @@ use App\Http\Controllers\Api\V1\EquipmentController;
 use App\Http\Controllers\Api\V1\EquipmentTypeController;
 
 Route::patterns([
-    'equipmentId' => '[0-9]+'
+    'equipment' => '[0-9]+'
 ]);
 
-Route::prefix('equipments')->group(function () {
-    Route::get('/', [EquipmentController::class, 'index']);
-    Route::get('/{equipmentId}', [EquipmentController::class, 'show']);
-    Route::delete('/{equipmentId}', [EquipmentController::class, 'destroy']);
-    Route::post('/', [EquipmentController::class, 'create']);
-    Route::put('/{equipmentId}', [EquipmentController::class, 'update']);
-});
+Route::apiResource('equipments', EquipmentController::class);
 
 Route::prefix('equipment-types')->group(function () {
     Route::get('/', [EquipmentTypeController::class, 'index']);
