@@ -16,7 +16,7 @@ class UpdateEquipmentRequest extends FormRequest
         return [
             'equipment_type_id' => 'integer|exists:equipment_types,id',
             'serial_number' => 'string|max:255',
-            'desc' => 'string|max:255'
+            'desc' => 'string|max:255|nullable'
         ];
     }
 }
