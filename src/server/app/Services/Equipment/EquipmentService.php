@@ -13,6 +13,7 @@ use App\Dto\In\Equipment\UpdateEquipmentDto;
 use Illuminate\Contracts\Pagination\Paginator;
 use App\Exceptions\InvalidSerialNumberException;
 use App\Dto\Out\Equipment\CreateEquipmentsResultDto;
+use App\Exceptions\SerialNumberAndTypeExist;
 use App\Services\Equipment\Factories\EquipmentFilterFactory;
 
 final class EquipmentService
@@ -98,6 +99,8 @@ final class EquipmentService
      * @param Equipment $equipment
      * @param UpdateEquipmentDto $updateEquipmentDto
      * @return Equipment
+     * @throws InvalidSerialNumberException
+     * @throws SerialNumberAndTypeExist
      */
     public function update(Equipment $equipment, UpdateEquipmentDto $updateEquipmentDto): Equipment
     {
@@ -159,6 +162,7 @@ final class EquipmentService
      * @param string $serialNumber
      * @param int $equipmentTypeId
      * @return bool
+     * @throws SerialNumberAndTypeExist
      */
     private function checkUniqueSerialNumber(string $serialNumber, int $equipmentTypeId): bool
     {
@@ -167,7 +171,7 @@ final class EquipmentService
             ->exists();
 
         if ($exists) {
-            throw new Exception('The equipment with this serial number and type already exists');
+            throw new SerialNumberAndTypeExist();
         }
 
         return true;
