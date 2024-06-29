@@ -44,9 +44,9 @@ final class EquipmentTypeFilter extends AbstractFilter
      * @param int $value
      * @return void
      */
-    protected function q(Builder $builder, int $value): void
+    protected function q(Builder $builder, string $value): void
     {
-        $builder->where('name', $value);
+        $builder->where('name', $value)
+            ->orWhere('mask', $value);
     }
-
 }
