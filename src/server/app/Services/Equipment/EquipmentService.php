@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use App\Models\EquipmentType;
 use Illuminate\Support\Facades\Validator;
 use App\Dto\In\Equipment\GetEquipmentsDto;
+use App\Rules\UniqueEquipmentSerialNumber;
 use App\Dto\In\Equipment\UpdateEquipmentDto;
 use Illuminate\Contracts\Pagination\Paginator;
 use App\Exceptions\InvalidSerialNumberException;
@@ -57,7 +58,12 @@ final class EquipmentService
         foreach ($data as $index => $equipmentData) {
             $validator = Validator::make($equipmentData, [
                 'equipment_type_id' => 'required|integer|exists:equipment_types,id',
-                'serial_number' => 'required|string|max:255',
+                'serial_number' => [
+                    'required',
+                    'string',
+                    'max:255',
+                    new UniqueEquipmentSerialNumber($equipmentData['equipment_type_id']),
+                ],
                 'desc' => 'string|max:255',
             ]);
 
