@@ -12,7 +12,7 @@ export type EquipmentType = {
 export type Equipment = {
     id: number,
     serialNumber: string,
-    desc: string,
+    desc: string | null,
     createdAt: Date,
     updatedAt: Date,
     equipmentType: EquipmentType

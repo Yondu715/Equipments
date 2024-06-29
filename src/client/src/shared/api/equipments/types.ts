@@ -9,7 +9,7 @@ export interface EquipmentTypeDto {
 export interface EquipmentDto {
     id: number,
     serial_number: string,
-    desc: string,
+    desc: string | null,
     created_at: Date,
     updated_at: Date,
     equipment_type: EquipmentTypeDto
@@ -17,13 +17,13 @@ export interface EquipmentDto {
 
 export interface UpdateEquipmentParams {
     serial_number?: string,
-    desc?: string,
+    desc?: string | null,
     equipment_type_id?: number
 }
 
 export interface CreateEquipmentParams {
     serial_number: string,
-    desc: string,
+    desc: string | null,
     equipment_type_id: number
 }
 

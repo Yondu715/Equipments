@@ -63,7 +63,7 @@
                     </div>
                 </span>
                 <span>
-                    Примечание: {{ equipment.desc }}
+                    Примечание: {{ equipment.desc ?? '-' }}
                 </span>
             </div>
             <template #footer>

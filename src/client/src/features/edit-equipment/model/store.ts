@@ -121,12 +121,7 @@ sample({
 sample({
     clock: updateEquipmentFormSubmitted,
     source: $desc,
-    fn: (desc) => {
-        if (isEmpty(desc)) {
-            return "Поле пустое";
-        }
-        return null;
-    },
+    fn: (desc) => null,
     target: $descError
 });
 

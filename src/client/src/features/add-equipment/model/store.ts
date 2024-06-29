@@ -94,12 +94,7 @@ sample({
 sample({
     clock: addEquipmentFormSubmitted,
     source: $desc,
-    fn: (desc) => {
-        if (isEmpty(desc)) {
-            return "Поле пустое";
-        }
-        return null;
-    },
+    fn: (desc) => null,
     target: $descError
 });
 
@@ -154,7 +149,7 @@ sample({
             return {
                 serial_number: serialNumber,
                 equipment_type_id: source.equipmentTypeId ?? -1,
-                desc: source.desc
+                desc: source.desc ?? null
             }
         });
     },
