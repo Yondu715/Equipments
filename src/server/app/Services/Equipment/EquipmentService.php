@@ -33,7 +33,8 @@ final class EquipmentService
         $filters = [
             'serialNumber' => $getEquipmentsDto->serialNumber,
             'desc' => $getEquipmentsDto->desc,
-            'equipmentTypeId' => $getEquipmentsDto->equipmentTypeId
+            'equipmentTypeId' => $getEquipmentsDto->equipmentTypeId,
+            'q' => $getEquipmentsDto->q
         ];
 
         return Equipment::query()

@@ -11,6 +11,7 @@ final class GetEquipmentsDto
      * @param ?int $equipmentTypeId
      * @param ?string $serialNumber
      * @param ?string $desc
+     * @param ?string $q
      * @param ?int $limit
      * @param ?int $page
      */
@@ -18,6 +19,7 @@ final class GetEquipmentsDto
         public readonly ?int $equipmentTypeId,
         public readonly ?string $serialNumber,
         public readonly ?string $desc,
+        public readonly ?string $q,
         public readonly ?int $limit,
         public readonly ?int $page
 
@@ -35,7 +37,8 @@ final class GetEquipmentsDto
             serialNumber: $getEquipmentsRequest->serial_number,
             desc: $getEquipmentsRequest->desc,
             limit: $getEquipmentsRequest->limit,
-            page: $getEquipmentsRequest->page
+            page: $getEquipmentsRequest->page,
+            q: $getEquipmentsRequest->q
         );
     }
 }

@@ -16,6 +16,7 @@ final class EquipmentFilter extends AbstractFilter
             'serialNumber' => [$this, 'serialNumber'],
             'desc' => [$this, 'desc'],
             'equipmentTypeId' => [$this, 'equipmentTypeId'],
+            'q' => [$this, 'q']
         ];
     }
 
@@ -49,4 +50,13 @@ final class EquipmentFilter extends AbstractFilter
         $builder->where('equipment_type_id', $value);
     }
 
+    /**
+     * @param Builder $builder
+     * @param string $value
+     * @return void
+     */
+    protected function q(Builder $builder, string $value): void
+    {
+        $builder->where('serial_number', $value);
+    }
 }
